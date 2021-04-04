@@ -1,23 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
+import ValidateComponent from "./components/ValidateComponent";
+import SomeComponent from "./components/SomeComponent";
+import {useState} from "react";
 
 function App() {
+  const [validateOn1, setValidateOn1] = useState(false);
+  const [validateOn2, setValidateOn2] = useState(false);
+  const validate1 = (value) => {
+    console.log('validate1', value);
+  }
+
+  const validate2 = () => {
+    console.log('validate2');
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ValidateComponent validateOn={validateOn1} setValidateOn={setValidateOn1} validate={validate1}>
+        <p onClick={() => setValidateOn1(true)}>validate1 lvl 1</p>
+        <SomeComponent />
+      </ValidateComponent>
+      <ValidateComponent validateOn={validateOn2} setValidateOn={setValidateOn2} validate={validate2}>
+        <div className='test'>
+          <p onClick={() => setValidateOn2(true)}>validate2 lvl 1</p>
+        </div>
+      </ValidateComponent>
     </div>
   );
 }
